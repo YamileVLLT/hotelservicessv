@@ -119,4 +119,9 @@ public class Administrador {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+    
+    public class EstatusAdministrador{
+        public static final byte ACTIVO = 1;
+        public static final byte INACTIVO = 2;
+    }
 }
