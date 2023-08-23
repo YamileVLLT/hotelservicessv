@@ -69,6 +69,10 @@ public class Servicio {
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
+
+    public void setIdHotel(String parameter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
    
    
     

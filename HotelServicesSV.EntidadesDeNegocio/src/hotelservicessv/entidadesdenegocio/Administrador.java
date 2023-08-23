@@ -119,6 +119,10 @@ public class Administrador {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    public void setConfirmePassword_aux(String parameter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     public class EstatusAdministrador{
         public static final byte ACTIVO = 1;

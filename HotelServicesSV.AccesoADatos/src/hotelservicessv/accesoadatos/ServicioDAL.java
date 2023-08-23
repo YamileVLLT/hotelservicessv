@@ -120,7 +120,7 @@ public class ServicioDAL {
         }
     }
     
-    private static void obtenerDatosIncluirContacto(PreparedStatement pPS, ArrayList<Servicio> pServicios) throws Exception {
+    private static void obtenerDatosIncluirHotel(PreparedStatement pPS, ArrayList<Servicio> pServicios) throws Exception {
         try (ResultSet resultSet = ComunDB.obtenerResultSet(pPS);) {
             HashMap<Integer, Hotel> hotelMap = new HashMap(); 
             while (resultSet.next()) {
@@ -250,7 +250,7 @@ public class ServicioDAL {
         return Servicios;
     }
     
-    public static ArrayList<Servicio> buscarIncluirContacto(Servicio pServicio) throws Exception {
+    public static ArrayList<Servicio> buscarIncluirHotel(Servicio pServicio) throws Exception {
         ArrayList<Servicio> Servicios = new ArrayList();
         try (Connection conn = ComunDB.obtenerConexion();) {
             String sql = "SELECT ";
@@ -261,7 +261,7 @@ public class ServicioDAL {
             sql += ",";
             sql += ServicioDAL.obtenerCampos();
             sql += " FROM Servicio e";
-            sql += " JOIN Contacto c on (e.IdContacto=c.Id)";
+            sql += " JOIN Hotel h on (e.IdHotel=h.Id)";
             ComunDB comundb = new ComunDB();
             ComunDB.utilQuery utilQuery = comundb.new utilQuery(sql, null, 0);
             querySelect(pServicio, utilQuery);
@@ -272,7 +272,7 @@ public class ServicioDAL {
                 utilQuery.setSQL(null);
                 utilQuery.setNumWhere(0);
                 querySelect(pServicio, utilQuery);
-                obtenerDatosIncluirContacto(ps, Servicios);
+                obtenerDatosIncluirHotel(ps, Servicios);
                 ps.close();
             } catch (SQLException ex) {
                 throw ex;
