@@ -1,17 +1,15 @@
-<%-- 
-    Document   : select
-    Created on : 22 ago. 2023, 13:02:23
-    Author     : MEGA
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@page import="hotelservicessv.entidadesdenegocio.Hotel"%>
+<%@page import="hotelservicessv.accesoadatos.HotelDAL"%>
+<%@page import="java.util.ArrayList"%>
+
+<% ArrayList<Hotel> hoteles = HotelDAL.obtenerTodos();
+    int id = Integer.parseInt(request.getParameter("id"));
+%>
+<select id="slHotel" name="idHotel">
+    <option <%=(id == 0) ? "selected" : ""%>  value="0">SELECCIONAR</option>
+    <% for (Hotel hotel : hoteles) {%>
+        <option <%=(id == hoteles.getId()) ? "selected" : "" %>  value="<%=hotel.getId()%>"><%= hotel.getNombre()%></option>
+    <%}%>
+</select>
+<label for="idHotel">Hotel</label>

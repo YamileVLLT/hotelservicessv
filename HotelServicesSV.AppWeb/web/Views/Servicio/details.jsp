@@ -1,17 +1,40 @@
-<%-- 
-    Document   : details
-    Created on : 17 ago. 2023, 15:43:23
-    Author     : MEGA
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="catalogoempresas.entidadesdenegocio.Empresa"%>
+<% Empresa empresa = (Empresa) request.getAttribute("empresa");%>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <jsp:include page="/Views/Shared/title.jsp" />
+        <title>Detalle de la Empresa</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <jsp:include page="/Views/Shared/headerBody.jsp" />  
+        <main class="container">   
+            <h5>Detalle de la Empresa</h5>
+             <div class="row">
+                <div class="row">
+                    <div class="input-field col l4 s12">
+                        <input  id="txtIdHotel" type="text" value="<%=servicio.getIdHotel()%>" disabled>
+                        <label for="txtIdHotel">IdHotel</label>
+                    </div>                       
+                    <div class="input-field col l4 s12">
+                        <input  id="txtServicios" type="text" value="<%=servicio.getServicios()%>" disabled>
+                        <label for="txtServicios">Servicios</label>
+                    </div>       
+                    <div class="input-field col l4 s12">
+                        <input id="txtEstado"text" value="<%=servicio.getEstado().getNombre()%>" disabled>
+                        <label for="txtEstado">Estado</label>
+                    </div> 
+                </div>
+
+                <div class="row">
+                    <div class="col l12 s12">
+                         <a href="Servicio?accion=edit&id=<%=servicio.getId()%>" class="waves-effect waves-light btn blue"><i class="material-icons right">edit</i>Ir modificar</a>            
+                        <a href="Servicio" class="waves-effect waves-light btn blue"><i class="material-icons right">cancel</i>Cancelar</a>                          
+                    </div>
+                </div>          
+        </main>
+        <jsp:include page="/Views/Shared/footerBody.jsp" />
     </body>
 </html>
