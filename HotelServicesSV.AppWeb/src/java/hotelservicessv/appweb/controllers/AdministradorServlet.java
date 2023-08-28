@@ -152,7 +152,7 @@ public class AdministradorServlet extends HttpServlet {
 
     private void doGetRequestLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SessionUser.cerrarSession(request);
-        request.getRequestDispatcher("Views/administrador/login.jsp").forward(request, response);
+        request.getRequestDispatcher("Views/Administrador/login.jsp").forward(request, response);
     }
 
     private void doPostRequestLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
