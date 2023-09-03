@@ -10,15 +10,16 @@
 <html>
     <head>
         <jsp:include page="/Views/Shared/title.jsp" />
-        <title>Principal</title>
+        <title>Principal Bienvenidos!</title>
     </head>
     <body>
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
         <main class="container"> 
             <div class="row">
-                <div class="col l12 s12">
-                    <h1>Bienvenidos</h1> 
-                    <span>Al sistema para aprender a como colocarle seguridad a sus aplicaciones web</span> 
+                <div class="centered">
+                    <h1>Bienvenidos!</h1>
+                    <img src="/HotelServicesSV.AppWeb/wwwroot/images/login.jpg" alt=""/>
+                    <span></span> 
                 </div>
             </div>            
         </main>

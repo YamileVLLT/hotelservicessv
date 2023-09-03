@@ -15,7 +15,7 @@
             <h5>Editar Hotel</h5>
             <form action="Hotel" method="post">
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>">   
-                <input type="hidden" name="id" value="<%=contacto.getId()%>">   
+                <input type="hidden" name="id" value="<%=Hotel.getId()%>">   
                 <div class="row">
                     <div class="input-field col l4 s12">
                         <input  id="txtNombre" type="text" name="nombre" value="<%=hotel.getNombre()%>" required class="validate" maxlength="50">

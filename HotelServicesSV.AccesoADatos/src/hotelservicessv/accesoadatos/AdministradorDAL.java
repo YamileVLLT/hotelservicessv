@@ -24,7 +24,7 @@ public class AdministradorDAL {
     }
     
     static String obtenerCampos() {
-        return "u.Id, u.IdRol, u.Nombre, u.Apellido, u.Login, u.Estatus, u.FechaRegistro";
+        return "u.Id, u.RolId, u.Nombre, u.Apellido, u.Login, u.Estatus, u.FechaRegistro";
     }
     
     private static String obtenerSelect(Administrador pAdministrador) {
@@ -33,7 +33,7 @@ public class AdministradorDAL {
         if (pAdministrador.getTop_aux() > 0 && ComunDB.TIPODB == ComunDB.TipoDB.SQLSERVER) {
              sql += "TOP " + pAdministrador.getTop_aux() + " ";
         }
-        sql += (obtenerCampos() + " FROM Usuario u");
+        sql += (obtenerCampos() + " FROM Administrador u");
         return sql;
     }
     
@@ -79,7 +79,7 @@ public class AdministradorDAL {
         boolean existe = existeLogin(pAdministrador);
         if (existe == false) {
             try (Connection conn = ComunDB.obtenerConexion();) {
-                sql = "INSERT INTO Usuario(IdRol,Nombre,Apellido,Login,Pass,Estatus,FechaRegistro) VALUES(?,?,?,?,?,?,?)";
+                sql = "INSERT INTO Administrador(RolId,Nombre,Apellido,Login,Password,Estatus,FechaRegistro) VALUES(?,?,?,?,?,?,?)";
                 try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                     ps.setInt(1, pAdministrador.getIdRol());
                     ps.setString(2, pAdministrador.getNombre());
@@ -111,7 +111,7 @@ public class AdministradorDAL {
         boolean existe = existeLogin(pAdministrador);
         if (existe == false) {
             try (Connection conn = ComunDB.obtenerConexion();) {                
-                sql = "UPDATE Usuario SET IdRol=?, Nombre=?, Apellido=?, Login=?, Estatus=? WHERE Id=?";
+                sql = "UPDATE Administrador SET RolId=?, Nombre=?, Apellido=?, Login=?, Estatus=? WHERE Id=?";
                 try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                     ps.setInt(1, pAdministrador.getIdRol());
                     ps.setString(2, pAdministrador.getNombre());  
@@ -140,7 +140,7 @@ public class AdministradorDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) { 
-            sql = "DELETE FROM Usuario WHERE Id=?"; 
+            sql = "DELETE FROM Administrador WHERE Id=?"; 
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setInt(1, pAdministrador.getId());
                 result = ps.executeUpdate();
@@ -174,12 +174,12 @@ public class AdministradorDAL {
         return pIndex;
     }
     
-    private static void obtenerDatos(PreparedStatement pPS, ArrayList<Administrador> pUsuarios) throws Exception {
+    private static void obtenerDatos(PreparedStatement pPS, ArrayList<Administrador> pAdministradores) throws Exception {
         try (ResultSet resultSet = ComunDB.obtenerResultSet(pPS);) { 
             while (resultSet.next()) {
-                Administrador usuario = new Administrador();
-                asignarDatosResultSet(usuario, resultSet, 0);
-                pUsuarios.add(usuario);
+                Administrador administrador = new Administrador();
+                asignarDatosResultSet(administrador, resultSet, 0);
+                pAdministradores.add(administrador);
             }
             resultSet.close();
         } catch (SQLException ex) {
@@ -362,7 +362,7 @@ public class AdministradorDAL {
 
         if (administradorAut.getId() > 0 && administradorAut.getLogin().equals(pAdministrador.getLogin())) {
             try (Connection conn = ComunDB.obtenerConexion();) {
-                sql = "UPDATE Usuario SET Password=? WHERE Id=?";
+                sql = "UPDATE Administrador SET Password=? WHERE Id=?";
                 try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                     ps.setString(1, encriptarMD5(pAdministrador.getPassword())); 
                     ps.setInt(2, pAdministrador.getId());
@@ -393,8 +393,8 @@ public class AdministradorDAL {
             sql += obtenerCampos();
             sql += ",";
             sql += RolDAL.obtenerCampos();
-            sql += " FROM Usuario u";
-            sql += " JOIN Rol r on (u.IdRol=r.Id)";
+            sql += " FROM Administrador u";
+            sql += " JOIN Rol r on (u.RolId=r.Id)";
             ComunDB comundb = new ComunDB();
             ComunDB.utilQuery utilQuery = comundb.new utilQuery(sql, null, 0);
             querySelect(pAdministrador, utilQuery);

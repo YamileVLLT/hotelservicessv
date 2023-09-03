@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="hotelservicessv.entidadesdenegocio.Hotel"%>
-<% Hotel contacto = (Hotel) request.getAttribute("hotel");%>
+<% Hotel hotel = (Hotel) request.getAttribute("hotel");%>
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
             <h5>Eliminar Hotel</h5>          
             <form action="Hotel" method="post">
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>">   
-                <input type="hidden" name="id" value="<%=contacto.getId()%>">   
+                <input type="hidden" name="id" value="<%=hotel.getId()%>">   
                 <div class="row">
                     <div class="input-field col l4 s12">
                         <input disabled  id="txtNombre" type="text" value="<%=hotel.getNombre()%>">

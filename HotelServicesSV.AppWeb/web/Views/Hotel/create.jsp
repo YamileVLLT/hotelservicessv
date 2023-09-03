@@ -9,7 +9,7 @@
     <body>
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
         <main class="container">   
-            <h5>Crear Hotel</h5>
+            <p><strong class="bold-arial"><h5>Crear Hotel</h5></strong></p>
             <form action="Hotel" method="post">
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>">                
                 <div class="row">

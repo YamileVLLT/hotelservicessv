@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="hotelservicessv.entidadesdenegocio.servici"%>
+<%@page import="hotelservicessv.entidadesdenegocio.servicio"%>
 <% Servicio servicio = (Servicio) request.getAttribute("servicio");%>
 
 <!DOCTYPE html>
@@ -12,9 +12,9 @@
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
         <main class="container">   
             <h5>Eliminar Servicio</h5>
-            <form action="Empresa" method="post">  
+            <form action="Servicio" method="post">  
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>"> 
-                <input type="hidden" name="id" value="<%=empresa.getId()%>">  
+                <input type="hidden" name="id" value="<%=servicio.getId()%>">  
                 <div class="row">
                     <div class="input-field col l4 s12">
                         <input  id="txtIdHotel" type="text" value="<%=servicio.getNombre()%>" disabled>

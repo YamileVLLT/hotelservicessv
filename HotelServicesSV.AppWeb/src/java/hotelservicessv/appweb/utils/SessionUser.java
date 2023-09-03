@@ -44,7 +44,7 @@ public class SessionUser {
         if (SessionUser.isAuth(request)) {
             pIAuthorize.authorize();
         } else {
-            response.sendRedirect("Usuario?accion=login");
+            response.sendRedirect("Administrador?accion=login");
         }
     }
     

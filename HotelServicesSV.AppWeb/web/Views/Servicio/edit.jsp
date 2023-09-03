@@ -12,9 +12,9 @@
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
         <main class="container">   
             <h5>Editar Servicio</h5>
-            <form action="Empresa" method="post" onsubmit="return  validarFormulario()">
+            <form action="servicio" method="post" onsubmit="return  validarFormulario()">
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>"> 
-                <input type="hidden" name="id" value="<%=empresa.getId()%>">  
+                <input type="hidden" name="id" value="<%=servicio.getId()%>">  
                 <div class="row">
                     <div class="input-field col l4 s12">
                         <input  id="txtIdHotel" type="text" name="idhotel" value="<%=servicio.getIdHotel()%>" required class="validate" maxlength="50">

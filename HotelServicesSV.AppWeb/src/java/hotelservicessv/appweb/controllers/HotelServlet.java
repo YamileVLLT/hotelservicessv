@@ -43,7 +43,7 @@ private Hotel obtenerHotel(HttpServletRequest request) {
             Hotel hotel = new Hotel();
             hotel.setTop_aux(10);
             ArrayList<Hotel> hoteles = HotelDAL.buscar(hotel);
-            request.setAttribute("Hoteles", hoteles);
+            request.setAttribute("hoteles", hoteles);
             request.setAttribute("top_aux", hotel.getTop_aux());             
             request.getRequestDispatcher("Views/Hotel/index.jsp").forward(request, response);
         } catch (Exception ex) {
@@ -64,7 +64,7 @@ private Hotel obtenerHotel(HttpServletRequest request) {
     }
     
     private void doGetRequestCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("Views/Contacto/create.jsp").forward(request, response);
+        request.getRequestDispatcher("Views/Hotel/create.jsp").forward(request, response);
     }
     
     private void doPostRequestCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -87,7 +87,7 @@ private Hotel obtenerHotel(HttpServletRequest request) {
             Hotel hotel = obtenerHotel(request);
             Hotel hotel_result = HotelDAL.obtenerPorId(hotel);
             if (hotel_result.getId() > 0) {
-                request.setAttribute("contacto", hotel_result);
+                request.setAttribute("hotel", hotel_result);
             } else {
                 Utilidad.enviarError("El Id:" + hotel.getId() + " no existe en la tabla de Hotel", request, response);
             }
@@ -98,7 +98,7 @@ private Hotel obtenerHotel(HttpServletRequest request) {
     
     private void doGetRequestEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         requestObtenerPorId(request, response);
-        request.getRequestDispatcher("Views/Contacto/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("Views/Hotel/edit.jsp").forward(request, response);
     }
     
     private void doPostRequestEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

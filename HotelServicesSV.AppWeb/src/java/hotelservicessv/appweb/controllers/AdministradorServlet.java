@@ -33,7 +33,7 @@ public class AdministradorServlet extends HttpServlet {
         
         if (accion.equals("login") || accion.equals("create") || accion.equals("cambiarpass")) {
             administrador.setPassword(Utilidad.getParameter(request, "password", ""));
-            administrador.setConfirmePassword_aux(Utilidad.getParameter(request, "confirmPassword_aux", ""));
+            administrador.setConfirmPassword_aux(Utilidad.getParameter(request, "confirmPassword_aux", ""));
             if (accion.equals("cambiarpass")) {
                 administrador.setId(Integer.parseInt(Utilidad.getParameter(request, "id", "0")));
             }
@@ -48,7 +48,7 @@ public class AdministradorServlet extends HttpServlet {
             Administrador administrador = new Administrador();
             administrador.setTop_aux(10);
             ArrayList<Administrador> administradores = AdministradorDAL.buscarIncluirRol(administrador);
-            request.setAttribute("usuarios", administradores);
+            request.setAttribute("administradores", administradores);
             request.setAttribute("top_aux", administrador.getTop_aux());
             request.getRequestDispatcher("Views/Administrador/index.jsp").forward(request, response);
         } catch (Exception ex) {
@@ -62,14 +62,14 @@ public class AdministradorServlet extends HttpServlet {
             ArrayList<Administrador> administradores = AdministradorDAL.buscarIncluirRol(administrador);
             request.setAttribute("administradores", administradores);
             request.setAttribute("top_aux", administrador.getTop_aux());
-            request.getRequestDispatcher("Views/Usuario/index.jsp").forward(request, response);
+            request.getRequestDispatcher("Views/Admnistrador/index.jsp").forward(request, response);
         } catch (Exception ex) {
             Utilidad.enviarError(ex.getMessage(), request, response);
         }
     }
 
     private void doGetRequestCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("Views/administrador/create.jsp").forward(request, response);
+        request.getRequestDispatcher("Views/Administrador/create.jsp").forward(request, response);
     }
 
     private void doPostRequestCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -124,15 +124,16 @@ public class AdministradorServlet extends HttpServlet {
             Utilidad.enviarError(ex.getMessage(), request, response);
         }
     }
-
+    
+        
     private void doGetRequestDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         requestObtenerPorId(request, response);
-        request.getRequestDispatcher("Views/administrador/details.jsp").forward(request, response);
+        request.getRequestDispatcher("Views/Administrador/details.jsp").forward(request, response);
     }
 
     private void doGetRequestDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         requestObtenerPorId(request, response);
-        request.getRequestDispatcher("Views/administrador/delete.jsp").forward(request, response);
+       request.getRequestDispatcher("Views/Administrador/delete.jsp").forward(request, response);
     }
 
     private void doPostRequestDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -181,7 +182,7 @@ public class AdministradorServlet extends HttpServlet {
             administrador.setLogin(SessionUser.getUser(request)); 
             Administrador administrador_result = AdministradorDAL.buscar(administrador).get(0);
             if (administrador_result.getId() > 0) {
-                request.setAttribute("usuario", administrador_result);
+                request.setAttribute("administrador", administrador_result);
                 request.getRequestDispatcher("Views/Administrador/cambiarPassword.jsp").forward(request, response);
             } else {
                 Utilidad.enviarError("El Id:" + administrador_result.getId() + " no existe en la tabla de Administrador", request, response);

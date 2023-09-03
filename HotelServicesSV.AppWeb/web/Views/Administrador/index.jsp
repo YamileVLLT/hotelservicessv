@@ -2,14 +2,14 @@
 <%@page import="hotelservicessv.entidadesdenegocio.Administrador"%>
 <%@page import="hotelservicessv.entidadesdenegocio.Rol"%>
 <%@page import="java.util.ArrayList"%>
-<% ArrayList<Administrador> administrador = (ArrayList<Administrador>) request.getAttribute("administrador");
+<% ArrayList<Administrador> administradores = (ArrayList<Administrador>) request.getAttribute("administradores");
     int numPage = 1;
     int numReg = 10;
     int countReg = 0;
-    if (administrador == null) {
-        administrador = new ArrayList();
-    } else if (administrador.size() > numReg) {
-        double divNumPage = (double) administrador.size() / (double) numReg;
+    if (administradores == null) {
+        administradores = new ArrayList();
+    } else if (administradores.size() > numReg) {
+        double divNumPage = (double) administradores.size() / (double) numReg;
         numPage = (int) Math.ceil(divNumPage);
     }
     String strTop_aux = request.getParameter("top_aux");
@@ -23,7 +23,7 @@
 <html>
     <head>        
         <jsp:include page="/Views/Shared/title.jsp" />
-        <title>Lista de Usuarios</title>
+        <title>Lista de Administradores</title>
 
     </head>
     <body>
@@ -88,7 +88,7 @@
                                 </tr>
                             </thead>                       
                             <tbody>                           
-                                <% for (Administrador administrador : administrador) {
+                                <% for (Administrador administrador : administradores) {
                                         int tempNumPage = numPage;
                                         if (numPage > 1) {
                                             countReg++;

@@ -30,7 +30,7 @@
                     </div>                     
                     <div class="input-field col l4 s12">   
                         <select id="slEstatus" name="estatus" class="validate">
-                            <option value="0" <%=(usuario.getEstatus() == 10) ? "selected" : ""%>>SELECCIONAR</option>
+                            <option value="0" <%=(Administrador.getEstatus() == 10) ? "selected" : ""%>>SELECCIONAR</option>
                             <option value="<%=Administrador.EstatusAdministrador.ACTIVO%>"  <%=(administrador.getEstatus() == Administrador.EstatusAdministrador.ACTIVO) ? "selected" : ""%>>ACTIVO</option>
                             <option value="<%=Administrador.EstatusAdministrador.INACTIVO%>"  <%=(administrador.getEstatus() == Administrador.EstatusAdministrador.INACTIVO) ? "selected" : ""%>>INACTIVO</option>
                         </select>       

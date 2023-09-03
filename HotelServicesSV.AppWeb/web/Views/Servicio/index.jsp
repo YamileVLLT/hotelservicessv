@@ -3,14 +3,14 @@
 <%@page import="hotelservicessv.entidadesdenegocio.Hotel"%>
 <%@page import="java.util.ArrayList"%>
 
-<% ArrayList<Servicios> servicios = (ArrayList<Servicio>) request.getAttribute("servicios");
+<% ArrayList<Servicio> servicios = (ArrayList<Servicio>) request.getAttribute("servicios");
     int numPage = 1;
     int numReg = 10;
     int countReg = 0;
     if (servicios == null) {
         servicios = new ArrayList();
     } else if (servicios.size() > numReg) {
-        double divNumPage = (double) empresas.size() / (double) numReg;
+        double divNumPage = (double) servicios.size() / (double) numReg;
         numPage = (int) Math.ceil(divNumPage);
     }
     String strTop_aux = request.getParameter("top_aux");
@@ -29,7 +29,7 @@
     <body>
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
         <main class="container">   
-            <h5>Buscar Servicio</h5>
+            <h5>Buscar Servicios</h5>
             <form action="Servicio" method="post">
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>"> 
                 <div class="row">
@@ -59,7 +59,7 @@
                 <div class="row">
                     <div class="col l12 s12">
                         <button type="sutmit" class="waves-effect waves-light btn blue"><i class="material-icons right">search</i>Buscar</button>
-                        <a href="Hotel?accion=create" class="waves-effect waves-light btn blue"><i class="material-icons right">add</i>Crear</a>                          
+                        <a href="Servicio?accion=create" class="waves-effect waves-light btn blue"><i class="material-icons right">add</i>Crear</a>                          
                     </div>
                 </div>
             </form>
@@ -85,7 +85,7 @@
                                         }
                                 %>
                                 <tr data-page="<%= tempNumPage%>">                                    
-                                    <td><%=servicio.getIdHotel()%></td>  
+                                    <td><%=servicio.getIdhotel()%></td>  
                                     <td><%=servicio.getServicios()%></td>
                                     <td><%=servicio.getEstado()%></td>  
                                     <td><%=servicio.getHotel().getNombre()%></td>  

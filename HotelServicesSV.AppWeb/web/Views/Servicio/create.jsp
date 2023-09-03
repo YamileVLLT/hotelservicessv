@@ -5,7 +5,7 @@
 <html>
     <head>
         <jsp:include page="/Views/Shared/title.jsp" />
-        <title>Crear Servicio</title>
+        <p style="font-family: 'Arial', sans-serif;"><title>Crear Servicio</title></p>
     </head>
     <body>
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
@@ -23,7 +23,7 @@
                         <label for="txtServicios">Servicios</label>
                     </div> 
                     <div class="input-field col l4 s12">
-                        <input  id="txtEstado" type="text" name="departamento" required class="validate" minlength="5" maxlength="32">
+                        <input  id="txtEstado" type="text" name="estado" required class="validate" minlength="5" maxlength="32">
                         <label for="txtEstado">Estado</label>
                     </div>  
                     <div class="input-field col l4 s12">   
@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col l12 s12">
                         <button type="sutmit" class="waves-effect waves-light btn blue"><i class="material-icons right">save</i>Guardar</button>
-                        <a href="Empresa" class="waves-effect waves-light btn blue"><i class="material-icons right">cancel</i>Cancelar</a>                          
+                        <a href="Servicio" class="waves-effect waves-light btn blue"><i class="material-icons right">cancel</i>Cancelar</a>                          
                     </div>
                 </div>
             </form>          

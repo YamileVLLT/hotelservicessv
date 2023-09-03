@@ -1,17 +1,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="catalogoempresas.entidadesdenegocio.Empresa"%>
-<% Empresa empresa = (Empresa) request.getAttribute("empresa");%>
+<%@page import="hotelservicessv.entidadesdenegocio.Servicio"%>
+<% Servicio servicio = (Servicio) request.getAttribute("servicio");%>
 
 <!DOCTYPE html>
 <html>
     <head>
         <jsp:include page="/Views/Shared/title.jsp" />
-        <title>Detalle de la Empresa</title>
+        <title>Detalle de la Servicio</title>
     </head>
     <body>
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
         <main class="container">   
-            <h5>Detalle de la Empresa</h5>
+            <h5>Detalle de la Servicio</h5>
              <div class="row">
                 <div class="row">
                     <div class="input-field col l4 s12">

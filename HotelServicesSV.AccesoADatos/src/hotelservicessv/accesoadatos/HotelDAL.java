@@ -15,12 +15,12 @@ public class HotelDAL {
         if (pHotel.getTop_aux() > 0 && ComunDB.TIPODB == ComunDB.TipoDB.SQLSERVER) {            
             sql += "TOP " + pHotel.getTop_aux() + " ";
         }
-        sql += (obtenerCampos() + " FROM Contacto c");
+        sql += (obtenerCampos() + " FROM Hotel h");
         return sql;
     }
     
     private static String agregarOrderBy(Hotel pHotel) {
-        String sql = " ORDER BY c.Id DESC";
+        String sql = " ORDER BY h.Id DESC";
         if (pHotel.getTop_aux() > 0 && ComunDB.TIPODB == ComunDB.TipoDB.MYSQL) {
             sql += " LIMIT " + pHotel.getTop_aux() + " ";
         }
@@ -31,7 +31,7 @@ public class HotelDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) { 
-            sql = "INSERT INTO Contacto(Nombre, Email, Telefono, Celular) VALUES(?, ?, ?, ?)";
+            sql = "INSERT INTO Hotel(Nombre, Imagen, Direccion, Descripcion, Telefono, Departamento, Entrada, Horario) VALUES(?, ?, ?, ?)";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setString(1, pHotel.getNombre());
                 ps.setString(2, pHotel.getImagen());
@@ -57,7 +57,7 @@ public class HotelDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) {
-            sql = "UPDATE Contacto SET Nombre=?, Email = ?, Telefono = ?, Celular = ? WHERE Id=?";
+            sql = "UPDATE Hotel SET Nombre=?, Imagen = ?, Direccion = ?, Descripcion = ?, Telefono = ?, Departamento = ?, Entrada = ?, Horario = ? WHERE Id=?";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setString(1, pHotel.getNombre());
                 ps.setString(2, pHotel.getImagen());
@@ -138,7 +138,7 @@ public class HotelDAL {
         ArrayList<Hotel> hoteles = new ArrayList();
         try (Connection conn = ComunDB.obtenerConexion();) { 
             String sql = obtenerSelect(pHotel);
-            sql += " WHERE c.Id=?";
+            sql += " WHERE h.Id=?";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setInt(1, pHotel.getId());
                 obtenerDatos(ps, hoteles);
@@ -179,14 +179,14 @@ public class HotelDAL {
     static void querySelect(Hotel pHotel, ComunDB.utilQuery pUtilQuery) throws SQLException {
         PreparedStatement statement = pUtilQuery.getStatement();
         if (pHotel.getId() > 0) {
-            pUtilQuery.AgregarNumWhere(" c.Id=? ");
+            pUtilQuery.AgregarNumWhere(" h.Id=? ");
             if (statement != null) { 
                 statement.setInt(pUtilQuery.getNumWhere(), pHotel.getId()); 
             }
         }
 
         if (pHotel.getNombre() != null && pHotel.getNombre().trim().isEmpty() == false) {
-            pUtilQuery.AgregarNumWhere(" c.Nombre LIKE ? "); 
+            pUtilQuery.AgregarNumWhere(" h.Nombre LIKE ? "); 
             if (statement != null) {
                 statement.setString(pUtilQuery.getNumWhere(), "%" + pHotel.getNombre() + "%"); 
             }
@@ -243,7 +243,7 @@ public class HotelDAL {
     }
     
     public static ArrayList<Hotel> buscar(Hotel pHotel) throws Exception {
-        ArrayList<Hotel> Hotel = new ArrayList();
+        ArrayList<Hotel> hotel = new ArrayList();
         try (Connection conn = ComunDB.obtenerConexion();) {
             String sql = obtenerSelect(pHotel);
             ComunDB comundb = new ComunDB();
@@ -256,7 +256,7 @@ public class HotelDAL {
                 utilQuery.setSQL(null);
                 utilQuery.setNumWhere(0); 
                 querySelect(pHotel, utilQuery);
-                obtenerDatos(ps, Hotel);
+                obtenerDatos(ps, hotel);
                 ps.close();
             } catch (SQLException ex) {
                 throw ex;
@@ -266,6 +266,6 @@ public class HotelDAL {
         catch (SQLException ex) {
             throw ex;
         }
-        return Hotel;
+        return hotel;
     }
 }

@@ -20,7 +20,7 @@ public class ServicioDAL {
     }
     
     private static String agregarOrderBy(Servicio pServicio) {
-        String sql = " ORDER BY e.Id DESC";
+        String sql = " ORDER BY s.Id DESC";
         if (pServicio.getTop_aux() > 0 && ComunDB.TIPODB == ComunDB.TipoDB.MYSQL) {
             sql += " LIMIT " + pServicio.getTop_aux() + " ";
         }
@@ -147,7 +147,7 @@ public class ServicioDAL {
         ArrayList<Servicio> servicios = new ArrayList();
         try (Connection conn = ComunDB.obtenerConexion();) {
             String sql = obtenerSelect(pServicio);
-            sql += " WHERE e.Id=?";
+            sql += " WHERE s.Id=?";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setInt(1, pServicio.getId());
                 obtenerDatos(ps, servicios);
@@ -188,21 +188,21 @@ public class ServicioDAL {
     static void querySelect(Servicio pServicio, ComunDB.utilQuery pUtilQuery) throws SQLException {
         PreparedStatement statement = pUtilQuery.getStatement();
         if (pServicio.getId() > 0) {
-            pUtilQuery.AgregarNumWhere(" e.Id=? ");
+            pUtilQuery.AgregarNumWhere(" s.Id=? ");
             if (statement != null) {
                 statement.setInt(pUtilQuery.getNumWhere(), pServicio.getId());
             }
         }
 
         if (pServicio.getId()> 0) {
-            pUtilQuery.AgregarNumWhere(" e.Id=? ");
+            pUtilQuery.AgregarNumWhere(" s.Id=? ");
             if (statement != null) {
                 statement.setInt(pUtilQuery.getNumWhere(), pServicio.getId());
             }
         }
         
         if (pServicio.getIdhotel()> 0) {
-            pUtilQuery.AgregarNumWhere(" e.Id=? ");
+            pUtilQuery.AgregarNumWhere(" s.Id=? ");
             if (statement != null) {
                 statement.setInt(pUtilQuery.getNumWhere(), pServicio.getId());
             }
@@ -224,7 +224,7 @@ public class ServicioDAL {
     }
     
     public static ArrayList<Servicio> buscar(Servicio pServicio) throws Exception {
-        ArrayList<Servicio> Servicios = new ArrayList();
+        ArrayList<Servicio> servicios = new ArrayList();
         try (Connection conn = ComunDB.obtenerConexion();) {
             String sql = obtenerSelect(pServicio);
             ComunDB comundb = new ComunDB();
@@ -237,7 +237,7 @@ public class ServicioDAL {
                 utilQuery.setSQL(null);
                 utilQuery.setNumWhere(0);
                 querySelect(pServicio, utilQuery);
-                obtenerDatos(ps, Servicios);
+                obtenerDatos(ps, servicios);
                 ps.close();
             } catch (SQLException ex) {
                 throw ex;
@@ -247,11 +247,11 @@ public class ServicioDAL {
         catch (SQLException ex) {
             throw ex;
         }
-        return Servicios;
+        return servicios;
     }
     
     public static ArrayList<Servicio> buscarIncluirHotel(Servicio pServicio) throws Exception {
-        ArrayList<Servicio> Servicios = new ArrayList();
+        ArrayList<Servicio> servicios = new ArrayList();
         try (Connection conn = ComunDB.obtenerConexion();) {
             String sql = "SELECT ";
             if (pServicio.getTop_aux() > 0 && ComunDB.TIPODB == ComunDB.TipoDB.SQLSERVER) {
@@ -260,8 +260,8 @@ public class ServicioDAL {
             sql += obtenerCampos();
             sql += ",";
             sql += ServicioDAL.obtenerCampos();
-            sql += " FROM Servicio e";
-            sql += " JOIN Hotel h on (e.IdHotel=h.Id)";
+            sql += " FROM Servicio s";
+            sql += " JOIN Hotel h on (s.IdHotel=h.Id)";
             ComunDB comundb = new ComunDB();
             ComunDB.utilQuery utilQuery = comundb.new utilQuery(sql, null, 0);
             querySelect(pServicio, utilQuery);
@@ -272,7 +272,7 @@ public class ServicioDAL {
                 utilQuery.setSQL(null);
                 utilQuery.setNumWhere(0);
                 querySelect(pServicio, utilQuery);
-                obtenerDatosIncluirHotel(ps, Servicios);
+                obtenerDatosIncluirHotel(ps, servicios);
                 ps.close();
             } catch (SQLException ex) {
                 throw ex;
@@ -281,6 +281,6 @@ public class ServicioDAL {
         } catch (SQLException ex) {
             throw ex;
         }
-        return Servicios;
+        return servicios;
     } 
 }

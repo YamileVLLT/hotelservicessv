@@ -14,7 +14,7 @@ import hotelservicessv.appweb.utils.*;
 import hotelservicessv.entidadesdenegocio.Hotel;
 import hotelservicessv.entidadesdenegocio.Servicio;
 
-@WebServlet(name = "ServicioServlet", urlPatterns = {"/ServicioServlet"})
+@WebServlet(name = "ServicioServlet", urlPatterns = {"/Servicio"})
 public class ServicioServlet extends HttpServlet {
     private Servicio obtenerServicio(HttpServletRequest request) {
         String accion = Utilidad.getParameter(request, "accion", "index");
@@ -40,7 +40,7 @@ public class ServicioServlet extends HttpServlet {
             Servicio servicio = new Servicio();
             servicio.setTop_aux(10);
             ArrayList<Servicio> servicios = ServicioDAL.buscarIncluirHotel(servicio);
-            request.setAttribute("empresas", servicios);
+            request.setAttribute("servicios", servicios);
             request.setAttribute("top_aux", servicio.getTop_aux());
             request.getRequestDispatcher("Views/Servicio/index.jsp").forward(request, response);
         } catch (Exception ex) {
@@ -55,7 +55,7 @@ public class ServicioServlet extends HttpServlet {
             servicios = ServicioDAL.buscarIncluirHotel(servicio);
             request.setAttribute("servicio", servicios);
             request.setAttribute("top_aux", servicio.getTop_aux());
-            request.getRequestDispatcher("Views/Empresa/index.jsp").forward(request, response);
+            request.getRequestDispatcher("Views/Servicio/index.jsp").forward(request, response);
         } catch (Exception ex) {
             Utilidad.enviarError(ex.getMessage(), request, response);
         }

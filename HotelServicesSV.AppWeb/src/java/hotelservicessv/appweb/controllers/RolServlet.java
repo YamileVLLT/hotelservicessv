@@ -13,7 +13,7 @@ import hotelservicessv.accesoadatos.RolDAL;
 import hotelservicessv.entidadesdenegocio.Rol;
 import hotelservicessv.appweb.utils.*;
 
-@WebServlet(name = "RolServlet", urlPatterns = {"/RolServlet"})
+@WebServlet(name = "RolServlet", urlPatterns = {"/Rol"})
 public class RolServlet extends HttpServlet {
     private Rol obtenerRol(HttpServletRequest request) {
         String accion = Utilidad.getParameter(request, "accion", "index");

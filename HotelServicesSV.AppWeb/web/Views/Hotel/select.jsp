@@ -9,7 +9,7 @@
 <select id="slHotel" name="idHotel">
     <option <%=(id == 0) ? "selected" : ""%>  value="0">SELECCIONAR</option>
     <% for (Hotel hotel : hoteles) {%>
-        <option <%=(id == hoteles.getId()) ? "selected" : "" %>  value="<%=hotel.getId()%>"><%= hotel.getNombre()%></option>
+        <option <%=(id == hotel.getId()) ? "selected" : "" %>  value="<%=hotel.getId()%>"><%= hotel.getNombre()%></option>
     <%}%>
 </select>
 <label for="idHotel">Hotel</label>
